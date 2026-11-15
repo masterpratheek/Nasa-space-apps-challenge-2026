@@ -1,0 +1,79 @@
+/* Additional animation and utility styles */
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  100% { opacity: 0.5; }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 10px rgba(37, 99, 236, 0.5); }
+  50% { box-shadow: 0 0 20px rgba(37, 99, 236, 0.8); }
+}
+
+.glow:hover {
+  animation: glow 1.5s ease-in-out infinite;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(90deg, #60A5FA, #A855F7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+}
+
+/* Progress indicator */
+.progress-ring {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  border-top: 4px solid #3B82F6;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { border-top-color: #3B82F6; }
+  100% { border-top-color: #F59E0B; }
+}
+
+/* Responsive fixes */
+@media (max-width: 768px) {
+  .main-container {
+    padding: 1rem;
+  }
+
+  .grid-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .card-glass {
+    padding: 1rem;
+  }
+
+  .stage-title {
+    font-size: 1.5rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-header {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.8rem 1rem;
+  }
+
+  .mission-nav {
+    max-width: 100%;
+  }
+
+  .main-container {
+    padding: 0.8rem;
+  }
+}
