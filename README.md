@@ -1,17 +1,17 @@
 # NASA Space Apps Challenge 2026
-## Junior Astronaut Mission Trainer
+## Astronaut Mission Trainer
 
-**An interactive Luna 11 mission experience and space-outpost simulation for children aged 7–12.**
+**An interactive Luna mission experience and space-outpost simulation for children .**
 
 Experience humanity's greatest achievement: the first steps on the Moon!
 
 ### Features
 
-- Full Luna 11 chronological journey
+- Full Luna chronological journey
 - Interactive launch preparation system checks
 - Cinematic Super Rocket launch animation
 - Earth atmospheric layers exploration
-- Multi-stage rocket visualization
+- Multi stage rocket visualization
 - Orbital mechanics simulator
 - Translunar injection demonstration
 - Columbia and Eagle docking sequence
@@ -19,14 +19,8 @@ Experience humanity's greatest achievement: the first steps on the Moon!
 - Landing zone hazard identification challenge
 - Continuous lunar or Martian outpost chapter with a 10-day resource-management simulation
 - Cinematic Mission Control debrief with Luna and outpost progress reporting
-- Final Earth-and-Moon mission celebration
+- Final Earth and Moon mission celebration
 
-### Mission Timeline: July 16–20, 1969
-
-- **Launch:** July 16, 1969, 9:32 AM EDT
-- **Landing:** July 20, 1969, 4:17 PM EDT at the Sea of Tranquility
-
-The real mission was NASA’s Apollo 11. This game retells parts of that mission as a simplified Luna 11 adventure; the game’s choices, outpost, and outcomes are simulations.
 
 ### Development Setup
 
@@ -49,7 +43,6 @@ npm run build
 ### Technologies
 
 - React 18
-- Vite
 - TypeScript
 - CSS (Glassmorphism UI)
 
@@ -64,7 +57,7 @@ npm run build
 
 NASA is credited for the linked factual material and does not sponsor or endorse this game. The outpost, resource values, events, timings, and outcomes are educational simulations; no live NASA data or API is used. The game’s graphics are in-app educational illustrations, not NASA imagery or official hardware designs.
 
-### Luna 11 Crew
+### Luna Crew
 
 - Neil Armstrong — Commander
 - Buzz Aldrin — Lunar Module Pilot
