@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # NASA Space Apps Challenge 2026
 ## ASTRONAUT MISSION TRAINER
 
@@ -66,3 +67,6 @@ Outpost resources, event timing, and outcomes are simplified educational simulat
 
 ### License
 NASA Historical Resources - Educational Use
+=======
+# Nasa-space-apps-challenge-2026
+>>>>>>> origin/main
