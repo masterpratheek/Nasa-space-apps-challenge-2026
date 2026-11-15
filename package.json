@@ -1,7 +1,7 @@
 {
   "name": "astronaut-mission-trainer",
   "version": "1.0.0",
-  "description": "Apollo 11 Mission Trainer - An interactive educational experience for children aged 7-12",
+  "description": "Luna 11 Mission Trainer - An interactive educational experience for children aged 7-12",
   "type": "module",
   "scripts": {
     "dev": "vite",

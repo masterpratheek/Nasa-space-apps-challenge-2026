@@ -7,6 +7,7 @@ import { DockingAlignmentGuide } from './spacecraft/DockingAlignmentGuide';
 
 interface SpacecraftDockingProps {
   onComplete: () => void;
+  onTutorContextChange?: (topic: string | null) => void;
 }
 
 const EDUCATIONAL_MESSAGES: Record<string, string> = {
@@ -35,7 +36,7 @@ const SPACECRAFT_LABELS = [
   { id: 'eagle', name: 'Eagle (LM)', color: '#10b981' },
 ];
 
-export const SpacecraftDocking: React.FC<SpacecraftDockingProps> = ({ onComplete }) => {
+export const SpacecraftDocking: React.FC<SpacecraftDockingProps> = ({ onComplete, onTutorContextChange }) => {
   const [scene, setScene] = useState<DockingScene>('configuration');
   const [progress, setProgress] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -50,6 +51,11 @@ export const SpacecraftDocking: React.FC<SpacecraftDockingProps> = ({ onComplete
       : scene === 'extraction' || isComplete
         ? 100
         : 0;
+
+  useEffect(() => {
+    onTutorContextChange?.(`docking:${scene}`);
+    return () => onTutorContextChange?.(null);
+  }, [onTutorContextChange, scene]);
 
   useEffect(() => () => {
     if (timer.current !== null) window.clearInterval(timer.current);
@@ -106,7 +112,7 @@ export const SpacecraftDocking: React.FC<SpacecraftDockingProps> = ({ onComplete
           </div>
         </div>
 
-        <div className="card-glass" style={{ minHeight: '420px', display: 'flex', flexDirection: 'column' }}>
+        <div className="card-glass" data-mentor-focus="docking" style={{ minHeight: '420px', display: 'flex', flexDirection: 'column' }}>
           <div style={{ flex: 1, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'space-around', overflow: 'hidden' }}>
             {scene !== 'extraction' && !isComplete && (
               <div style={{ opacity: scene === 'separation' || scene === 'transposition' || scene === 'approach' || scene === 'docking' ? 0.45 : 1 }}>

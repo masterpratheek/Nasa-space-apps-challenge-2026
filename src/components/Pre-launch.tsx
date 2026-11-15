@@ -184,7 +184,7 @@ export const PreLaunch: React.FC<PreLaunchProps> = ({ systems, onCompleteSystem,
           allOk={allOk}
           onProceedToCountdown={onProceedToCountdown}
         />
-        <div className="card-glass" style={{ padding: '1rem' }}>
+        <div className="card-glass" data-mentor-focus="checks" style={{ padding: '1rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
             <h3 style={{ fontFamily: 'Orbitron', fontSize: '1rem', color: '#94A3B8', margin: 0 }}>ROCKET SYSTEMS</h3>
             <span style={{ fontFamily: 'Orbitron', color: '#10B981' }}>{systems.filter((system) => system.completed).length}/{systems.length} READY</span>

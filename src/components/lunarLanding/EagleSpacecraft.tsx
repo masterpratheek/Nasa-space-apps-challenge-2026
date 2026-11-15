@@ -18,7 +18,7 @@ export const EagleSpacecraft: React.FC<EagleSpacecraftProps> = ({
     className={`landing-eagle ${className} ${isThrusting ? 'is-thrusting' : ''} ${landed ? 'is-landed' : ''}`}
     style={style}
     role="img"
-    aria-label="Apollo 11 Eagle lunar module"
+    aria-label="Luna 11 Eagle lunar module"
   >
     <span className="landing-eagle-label">EAGLE</span>
     <LunarModule />

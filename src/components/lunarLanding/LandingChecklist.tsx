@@ -13,7 +13,7 @@ interface LandingChecklistProps {
 export const LandingChecklist: React.FC<LandingChecklistProps> = ({ items }) => (
   <section className="landing-panel landing-checklist" aria-label="Landing safety checklist">
     <h3>LANDING CHECKLIST</h3>
-    <p className="landing-panel-note">Game safety checks—not the real Apollo checklist.</p>
+    <p className="landing-panel-note">Game safety checks—not the real Luna checklist.</p>
     <ol>
       {items.map((item, index) => (
         <li key={item.id} className={item.complete ? 'check-complete' : ''}>

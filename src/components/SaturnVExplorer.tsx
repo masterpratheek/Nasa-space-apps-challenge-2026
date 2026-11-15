@@ -1,15 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SATURN_V_STAGES } from '../data/missionData';
 
 interface SaturnVExplorerProps {
   onComplete: () => void;
+  onTutorContextChange?: (topic: string | null) => void;
 }
 
-export const SaturnVExplorer: React.FC<SaturnVExplorerProps> = ({ onComplete }) => {
+export const SaturnVExplorer: React.FC<SaturnVExplorerProps> = ({ onComplete, onTutorContextChange }) => {
   const [selectedStageId, setSelectedStageId] = useState<string>('s-ic');
   const [separatedStages, setSeparatedStages] = useState<string[]>([]);
 
   const activeStage = SATURN_V_STAGES.find(s => s.id === selectedStageId) || SATURN_V_STAGES[0];
+
+  useEffect(() => {
+    onTutorContextChange?.(`saturnv:${selectedStageId}`);
+    return () => onTutorContextChange?.(null);
+  }, [onTutorContextChange, selectedStageId]);
 
   const handleSeparate = (stageId: string) => {
     if (!separatedStages.includes(stageId)) {
@@ -20,13 +26,13 @@ export const SaturnVExplorer: React.FC<SaturnVExplorerProps> = ({ onComplete }) 
   return (
     <div>
       <div className="stage-header">
-        <h2 className="stage-title">STAGE 5: EXPLORE THE SATURN V</h2>
-        <p className="stage-subtitle">Tap a rocket stage to learn how it helps Saturn V climb. Empty stages fall away so the rocket can keep going.</p>
+        <h2 className="stage-title">STAGE 5: EXPLORE THE SUPER ROCKET</h2>
+        <p className="stage-subtitle">Tap a rocket stage to learn how it helps Super Rocket climb. Empty stages fall away so the rocket can keep going.</p>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', gap: '1.5rem' }}>
-        <div className="card-glass" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '1.5rem', height: '420px' }}>
-          <div style={{ width: '40px', height: '40px', background: '#e2e8f0', borderRadius: '20px 20px 0 0', border: '2px solid #334155', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '9px', fontWeight: 'bold', color: '#000' }}>APOLLO</div>
+        <div className="card-glass" data-mentor-focus="rocket" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '1.5rem', height: '420px' }}>
+          <div style={{ width: '40px', height: '40px', background: '#e2e8f0', borderRadius: '20px 20px 0 0', border: '2px solid #334155', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '9px', fontWeight: 'bold', color: '#000' }}>LUNA</div>
 
           <div onClick={() => setSelectedStageId('s-ivb')} style={{ width: '65px', height: '60px', background: selectedStageId === 's-ivb' ? 'rgba(59, 130, 246, 0.4)' : '#475569', border: '2px solid #3B82F6', marginTop: separatedStages.includes('s-ivb') ? '15px' : '2px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
             <span style={{ fontSize: '10px', color: '#fff' }}>S-IVB</span>

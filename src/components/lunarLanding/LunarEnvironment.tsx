@@ -78,6 +78,7 @@ export const LunarEnvironment: React.FC<LunarEnvironmentProps> = ({
   return (
     <div
       className={`lunar-environment lunar-environment-${mode} ${mode === 'touchdown' ? `touchdown-step-${touchdownStep}` : ''}`}
+      data-mentor-focus="landing"
       aria-label={isGame ? 'Moon landing game scene' : 'View of the Moon and Eagle'}
     >
       <div className="landing-stars landing-stars-one" aria-hidden="true" />

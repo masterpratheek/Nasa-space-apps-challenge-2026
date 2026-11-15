@@ -14,13 +14,13 @@ export const AtmosphereExplorer: React.FC<AtmosphereExplorerProps> = ({ onComple
       <div className="stage-header">
         <h2 className="stage-title">STAGE 4: EXPLORE EARTH'S ATMOSPHERE</h2>
         <p className="stage-subtitle">
-          Follow Saturn V through Earth's five atmosphere layers on its way to space. Earth's gravity keeps pulling on the rocket!
+          Follow Super Rocket through Earth's five atmosphere layers on its way to space. Earth's gravity keeps pulling on the rocket!
         </p>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1.8fr', gap: '1.5rem' }}>
         {/* Vertical Atmospheric Layers Bar */}
-        <div className="card-glass" style={{ display: 'flex', flexDirection: 'column-reverse', gap: '0.5rem', padding: '1rem' }}>
+        <div className="card-glass" data-mentor-focus="atmosphere" style={{ display: 'flex', flexDirection: 'column-reverse', gap: '0.5rem', padding: '1rem' }}>
           {ATMOSPHERE_LAYERS.map((layer, idx) => (
             <button
               key={layer.name}

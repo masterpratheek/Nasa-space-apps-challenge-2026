@@ -24,13 +24,13 @@ export const EarthOrbit: React.FC<EarthOrbitProps> = ({ onComplete }) => {
       <div className="stage-header">
         <h2 className="stage-title">STAGE 6: EARTH ORBIT</h2>
         <p className="stage-subtitle">
-          The S-IVB puts Apollo into Earth parking orbit—a safe path around Earth while the crew gets ready for the Moon.
+          The S-IVB puts Luna into Earth parking orbit—a safe path around Earth while the crew gets ready for the Moon.
         </p>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: '1.5rem' }}>
         {/* Orbital Animation Visual */}
-        <div className="card-glass" style={{ height: '450px', position: 'relative', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div className="card-glass" data-mentor-focus="orbit" style={{ height: '450px', position: 'relative', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           {/* Earth Center */}
           <div style={{ 
             width: '120px', height: '120px', borderRadius: '50%', 

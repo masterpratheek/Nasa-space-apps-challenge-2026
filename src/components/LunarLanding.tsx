@@ -6,11 +6,12 @@ import '../styles/lunar-landing.css';
 
 interface LunarLandingProps {
   onComplete: () => void;
+  onTutorContextChange?: (topic: string | null) => void;
 }
 
 type LandingExperienceMode = 'demonstration' | 'game' | 'touchdown' | 'landed';
 
-export const LunarLanding: React.FC<LunarLandingProps> = ({ onComplete }) => {
+export const LunarLanding: React.FC<LunarLandingProps> = ({ onComplete, onTutorContextChange }) => {
   const [mode, setMode] = useState<LandingExperienceMode>('demonstration');
   const [demonstrationRun, setDemonstrationRun] = useState(0);
   const [touchdownRun, setTouchdownRun] = useState(0);
@@ -43,8 +44,13 @@ export const LunarLanding: React.FC<LunarLandingProps> = ({ onComplete }) => {
     setMode('touchdown');
   }, []);
 
+  useEffect(() => {
+    onTutorContextChange?.(`landing-${mode}`);
+    return () => onTutorContextChange?.(null);
+  }, [mode, onTutorContextChange]);
+
   return (
-    <div className="lunar-landing">
+    <div className="lunar-landing" data-mentor-focus="landing">
       {mode === 'demonstration' && (
         <LandingDemonstration
           key={demonstrationRun}

@@ -56,7 +56,7 @@ export const TouchdownCelebration: React.FC<TouchdownCelebrationProps> = ({
   const isFinished = step === 9;
 
   return (
-    <section className="landing-celebration" aria-label="Apollo 11 lunar touchdown">
+    <section className="landing-celebration" aria-label="Luna 11 lunar touchdown">
       <div className={`landing-celebration-scene ${isFinished ? 'celebration-finished' : ''}`}>
         <LunarEnvironment
           mode="touchdown"
@@ -77,7 +77,7 @@ export const TouchdownCelebration: React.FC<TouchdownCelebrationProps> = ({
           <p className="landing-eyebrow">JULY 20, 1969 · SEA OF TRANQUILITY</p>
           <h2>THE EAGLE HAS LANDED!</h2>
           <p>
-            On July 20, 1969, Apollo 11 made history. Eagle landed on the Moon, and Neil Armstrong and Buzz Aldrin explored another world!
+            On July 20, 1969, Luna 11 made history. Eagle landed on the Moon, and Neil Armstrong and Buzz Aldrin explored another world!
           </p>
           <LandingChecklist items={COMPLETED_CHECKLIST} />
           <div className="landing-celebration-actions">

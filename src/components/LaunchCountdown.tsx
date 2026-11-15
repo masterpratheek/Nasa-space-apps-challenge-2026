@@ -76,11 +76,11 @@ export const LaunchCountdown: React.FC<LaunchCountdownProps> = ({ onLaunchComple
           </div>
         </div>
 
-        <div className="card-glass" style={{ height: '400px', position: 'relative', overflow: 'hidden', background: 'linear-gradient(to top, #1e293b, #0f172a 60%, #020617)' }}>
+        <div className="card-glass" data-mentor-focus="rocket" style={{ height: '400px', position: 'relative', overflow: 'hidden', background: 'linear-gradient(to top, #1e293b, #0f172a 60%, #020617)' }}>
           {/* Launch Pad Tower */}
           <div style={{ position: 'absolute', bottom: '20px', left: '40%', width: '15px', height: '260px', background: '#334155', borderRight: '3px solid #64748b' }} />
 
-          {/* Saturn V Rocket */}
+          {/* Super Rocket */}
           <div style={{
             position: 'absolute', bottom: `${40 + rocketPos}px`, left: '48%', transform: 'translateX(-50%)',
             display: 'flex', flexDirection: 'column', alignItems: 'center'

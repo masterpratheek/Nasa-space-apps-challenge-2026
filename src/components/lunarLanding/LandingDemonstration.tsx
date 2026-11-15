@@ -75,9 +75,9 @@ export const LandingDemonstration: React.FC<LandingDemonstrationProps> = ({
   const phase = DEMO_PHASES[phaseIndex];
 
   return (
-    <section className="landing-demo" aria-label="Apollo 11 landing demonstration">
+    <section className="landing-demo" aria-label="Luna 11 landing demonstration">
       <div className="landing-stage-heading">
-        <p className="landing-eyebrow">STAGE 10 · APOLLO 11 LUNAR LANDING</p>
+        <p className="landing-eyebrow">STAGE 10 · LUNA 11 LUNAR LANDING</p>
         <h2>{isApproach ? 'CINEMATIC MOON APPROACH' : isSummary ? 'NOW YOU KNOW HOW EAGLE LANDS!' : phase.heading}</h2>
         <p>
           {isApproach
@@ -96,7 +96,7 @@ export const LandingDemonstration: React.FC<LandingDemonstrationProps> = ({
         />
         <div className="landing-demo-hud">
           <span>{isApproach ? 'MOON APPROACH' : isSummary ? 'DEMONSTRATION COMPLETE' : phase.name}</span>
-          <span>LEARNING SIMULATION · NOT REAL APOLLO DATA</span>
+          <span>LEARNING SIMULATION · NOT REAL LUNA DATA</span>
           {!isApproach && !isSummary && (
             <span>
               SIMULATED ALTITUDE: {Math.max(0, 1000 - phaseIndex * 245 - Math.round(phaseProgress * 240))} m

@@ -26,11 +26,11 @@ export const TranslunarInjection: React.FC<TranslunarInjectionProps> = ({ onComp
       <div className="stage-header">
         <h2 className="stage-title">STAGE 7: TRANSLUNAR INJECTION (TLI)</h2>
         <p className="stage-subtitle">
-          The S-IVB's second engine burn sends Apollo toward the Moon. The game speeds up the trip; the real journey took 3 days.
+          The S-IVB's second engine burn sends Luna toward the Moon. The game speeds up the trip; the real journey took 3 days.
         </p>
       </div>
 
-      <div className="card-glass" style={{ padding: '2rem', marginBottom: '1.5rem', position: 'relative', height: '400px', overflow: 'hidden' }}>
+      <div className="card-glass" data-mentor-focus="moon" style={{ padding: '2rem', marginBottom: '1.5rem', position: 'relative', height: '400px', overflow: 'hidden' }}>
         {/* Earth */}
         <div style={{ 
           position: 'absolute', left: '10%', top: '50%', transform: 'translateY(-50%)',
@@ -111,16 +111,16 @@ export const TranslunarInjection: React.FC<TranslunarInjectionProps> = ({ onComp
             WHAT IS TLI?
           </h3>
           <p style={{ fontSize: '0.95rem', color: '#CBD5E1', marginBottom: '1rem' }}>
-            TLI means Translunar Injection—the big engine push that sends Apollo from Earth orbit toward the Moon. The S-IVB fires for about 6 minutes, speeding up the spacecraft from about 22,500 km/h to over 39,000 km/h.
+            TLI means Translunar Injection—the big engine push that sends Luna from Earth orbit toward the Moon. The S-IVB fires for about 6 minutes, speeding up the spacecraft from about 22,500 km/h to over 39,000 km/h.
           </p>
           <p style={{ fontSize: '0.95rem', color: '#CBD5E1', marginBottom: '1.5rem' }}>
-            This push sends Apollo along a long, curved path toward the Moon. It is the biggest single engine burn of the mission!
+            This push sends Luna along a long, curved path toward the Moon. It is the biggest single engine burn of the mission!
           </p>
           
           {isComplete && (
             <div>
               <div style={{ background: 'rgba(16, 185, 129, 0.2)', border: '1px solid #10B981', padding: '1rem', borderRadius: '6px', marginBottom: '1rem' }}>
-                <h4 style={{ color: '#10B981', fontFamily: 'Orbitron' }}>✅ APOLLO 11 IS ON A FREE-RETURN PATH TO THE MOON!</h4>
+                <h4 style={{ color: '#10B981', fontFamily: 'Orbitron' }}>✅ LUNA 11 IS ON A FREE-RETURN PATH TO THE MOON!</h4>
               </div>
               <button className="btn-primary" style={{ width: '100%' }} onClick={onComplete}>
                 NEXT: COLUMBIA & EAGLE DOCKING ➔

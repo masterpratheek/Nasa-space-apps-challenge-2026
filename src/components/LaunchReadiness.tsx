@@ -105,7 +105,7 @@ export const LaunchReadiness: React.FC<LaunchReadinessProps> = ({
           {isAllReady && (
             <div style={{ marginTop: '1.5rem', textAlign: 'center', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '1rem' }}>
               <p style={{ color: '#10B981', fontFamily: 'Orbitron', fontSize: '1rem', marginBottom: '0.8rem' }}>
-                🌟 ALL SYSTEMS READY! SATURN V CAN LAUNCH!
+                🌟 ALL SYSTEMS READY! SUPER ROCKET CAN LAUNCH!
               </p>
               <button className="btn-primary" onClick={onProceedToCountdown}>
                 ⏱️ START THE LAUNCH COUNTDOWN

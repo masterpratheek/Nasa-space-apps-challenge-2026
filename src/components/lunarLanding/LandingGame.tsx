@@ -223,7 +223,7 @@ export const LandingGame: React.FC<LandingGameProps> = ({ onSuccess, onReplayDem
               <span className="landing-status-dot" />
               {game.status === 'active' ? 'LANDING IN PROGRESS' : 'TRY AGAIN'}
             </div>
-            <p>GAME VALUES · NOT DATA FROM THE REAL APOLLO FLIGHT</p>
+            <p>GAME VALUES · NOT DATA FROM THE REAL LUNA FLIGHT</p>
             <div className="landing-metrics">
               <div><span>GAME ALTITUDE</span><strong>{Math.round(game.altitude)} m</strong></div>
               <div><span>GAME DESCENT SPEED</span><strong>{game.descentSpeed.toFixed(1)} m/s</strong></div>

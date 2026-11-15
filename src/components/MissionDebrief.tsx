@@ -17,12 +17,12 @@ type DebriefPhase = 'return' | 'report' | 'celebration';
 const REPORT_MILESTONES: { id: string; label: string; stage?: MissionStage }[] = [
   { id: 'briefing', label: 'Mission briefing', stage: 'welcome' },
   { id: 'readiness', label: 'Ready for launch', stage: 'prelaunch' },
-  { id: 'countdown', label: 'Countdown and Saturn V liftoff', stage: 'countdown' },
+  { id: 'countdown', label: 'Countdown and Super Rocket liftoff', stage: 'countdown' },
   { id: 'ascent', label: 'Climbing through Earth’s atmosphere', stage: 'atmosphere' },
   { id: 'orbit', label: 'Orbiting Earth', stage: 'earthorbit' },
   { id: 'tli', label: 'TLI: engine push toward the Moon', stage: 'translunar' },
   { id: 'docking', label: 'Columbia and Eagle docked', stage: 'docking' },
-  { id: 'lunar-orbit', label: 'Apollo 11 entered lunar orbit', stage: 'lunarorbit' },
+  { id: 'lunar-orbit', label: 'Luna 11 entered lunar orbit', stage: 'lunarorbit' },
   { id: 'descent', label: 'Eagle’s descent to the Moon', stage: 'landing' },
   { id: 'landing', label: 'Landed safely on the Moon', stage: 'landing' },
   { id: 'outpost-established', label: 'Outpost ready', stage: 'outpost' },
@@ -84,18 +84,18 @@ export const MissionDebrief: React.FC<MissionDebriefProps> = ({
   if (phase === 'return') {
     return (
       <section className="debrief-return" aria-label="Return to mission control">
-        <div className="debrief-return-scene">
+        <div className="debrief-return-scene" data-mentor-focus="report">
           <div className="debrief-stars" aria-hidden="true">
             {Array.from({ length: 22 }, (_, index) => <i key={index} />)}
           </div>
           <div className="debrief-return-moon" aria-hidden="true" />
           <div className="debrief-return-earth" aria-hidden="true"><span>EARTH</span></div>
-          <div className="debrief-return-capsule" aria-hidden="true">APOLLO 11</div>
+          <div className="debrief-return-capsule" aria-hidden="true">LUNA 11</div>
           <div className="debrief-control-center" aria-hidden="true">
             <span>MISSION CONTROL</span><i /><i /><i />
           </div>
           <div className="debrief-return-copy">
-            <p className="debrief-eyebrow">APOLLO 11 · WELCOME BACK</p>
+            <p className="debrief-eyebrow">LUNA 11 · WELCOME BACK</p>
             <h1>{missionSucceeded ? 'MISSION COMPLETE!' : 'MISSION REVIEW'}</h1>
             <p>
               {missionSucceeded
@@ -116,11 +116,11 @@ export const MissionDebrief: React.FC<MissionDebriefProps> = ({
 
   if (phase === 'report') {
     return (
-      <section className="mission-debrief" aria-labelledby="mission-report-title">
-        <header className="debrief-header">
-          <p className="debrief-eyebrow">YOUR APOLLO 11 JOURNEY</p>
+      <section className="mission-debrief" data-mentor-focus="report" aria-labelledby="mission-report-title">
+        <header className="debrief-header" data-mentor-focus="report">
+          <p className="debrief-eyebrow">YOUR LUNA 11 JOURNEY</p>
           <h1 id="mission-report-title">MISSION REPORT</h1>
-          <p>See what you did on Apollo 11 and how you cared for the outpost crew.</p>
+          <p>See what you did on Luna 11 and how you cared for the outpost crew.</p>
           <strong className={`mission-status ${missionSucceeded ? 'mission-status-success' : 'mission-status-progress'}`}>
             MISSION STATUS: {missionSucceeded ? 'SUCCESS' : 'IN PROGRESS'}
           </strong>
@@ -196,8 +196,8 @@ export const MissionDebrief: React.FC<MissionDebriefProps> = ({
   }
 
   return (
-    <section className="mission-debrief final-celebration" aria-labelledby="celebration-title">
-      <div className="final-celebration-scene" aria-label="Earth, Moon, Saturn V, and Eagle celebrating your achievement">
+    <section className="mission-debrief final-celebration" data-mentor-focus="report" aria-labelledby="celebration-title">
+      <div className="final-celebration-scene" aria-label="Earth, Moon, Super Rocket, and Eagle celebrating your achievement">
         <div className="celebration-stars" aria-hidden="true">{Array.from({ length: 24 }, (_, index) => <i key={index} />)}</div>
         <div className="celebration-earth" aria-hidden="true"><span>EARTH</span></div>
         <div className="celebration-moon" aria-hidden="true" />

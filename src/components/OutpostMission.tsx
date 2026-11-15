@@ -620,7 +620,7 @@ const HabitatScene: React.FC<{
   eventKind: EventKind | null;
   onSelectSystem: (system: OutpostSystem) => void;
 }> = ({ progress, selectedSystem, eventKind, onSelectSystem }) => (
-  <section className={`outpost-scene ${progress.destination} ${eventKind ? `event-${eventKind}` : ''}`} aria-label={`${progress.destination} outpost habitat`}>
+  <section className={`outpost-scene ${progress.destination} ${eventKind ? `event-${eventKind}` : ''}`} data-mentor-focus={selectedSystem} aria-label={`${progress.destination} outpost habitat`}>
     <div className="outpost-scene-stars" aria-hidden="true">{Array.from({ length: 18 }, (_, index) => <i key={index} />)}</div>
     <div className="outpost-sky-body" aria-hidden="true" />
     <div className="outpost-distant-ridge" aria-hidden="true" />
@@ -630,18 +630,18 @@ const HabitatScene: React.FC<{
       <div className={`outpost-habitat-module ${progress.shielding >= 70 ? 'well-shielded' : ''}`}>
         <span>HABITAT</span><i /><i /><i />
       </div>
-      <div className={`outpost-life-support-unit ${progress.recyclerOnline ? '' : 'offline'} ${progress.oxygenScrubberLevel > 1 ? 'upgraded' : ''}`}><span>O₂ L{progress.oxygenScrubberLevel}</span><i /><i /></div>
-      <div className={`outpost-greenhouse-module ${progress.greenhouseLevel > 1 ? 'expanded' : ''}`}>
+      <div className={`outpost-life-support-unit ${progress.recyclerOnline ? '' : 'offline'} ${progress.oxygenScrubberLevel > 1 ? 'upgraded' : ''}`} data-mentor-focus="life-support"><span>O₂ L{progress.oxygenScrubberLevel}</span><i /><i /></div>
+      <div className={`outpost-greenhouse-module ${progress.greenhouseLevel > 1 ? 'expanded' : ''}`} data-mentor-focus="food">
         <div className={`greenhouse-dome crop-cycle-${progress.cropProgress}`}><i /><i /><i /></div>
         <span>GREENHOUSE</span>
       </div>
-      <div className={`outpost-solar-array ${progress.solarPanelDust >= 25 ? 'dusty' : ''}`}>
+      <div className={`outpost-solar-array ${progress.solarPanelDust >= 25 ? 'dusty' : ''}`} data-mentor-focus="power">
         <i /><i /><i /><i /><i /><i />
       </div>
       <div className="outpost-battery-stack">
         <i /><i />{progress.batteryModules > 0 && <i />}
       </div>
-      <div className={`outpost-shelter-dome ${progress.shielding >= 70 ? 'reinforced' : ''}`}><span>RADIATION<br />SHELTER</span></div>
+      <div className={`outpost-shelter-dome ${progress.shielding >= 70 ? 'reinforced' : ''}`} data-mentor-focus="radiation"><span>RADIATION<br />SHELTER</span></div>
       <div className={`outpost-water-recycler ${progress.recyclerOnline ? 'online' : 'offline'} ${progress.recyclingLevel > 1 ? 'upgraded' : ''}`}><i /><span>WATER<br />RECYCLE</span></div>
     </div>
     <button className={`outpost-hotspot hotspot-life ${selectedSystem === 'life-support' ? 'selected' : ''}`} type="button" onClick={() => onSelectSystem('life-support')} aria-label="View life support systems">LIFE SUPPORT</button>
@@ -659,7 +659,8 @@ const OutpostMission: React.FC<{
   outpost: OutpostProgress | null;
   onProgressChange: (progress: OutpostProgress | null) => void;
   onComplete: () => void;
-}> = ({ outpost, onProgressChange, onComplete }) => {
+  onTutorContextChange?: (topic: string | null) => void;
+}> = ({ outpost, onProgressChange, onComplete, onTutorContextChange }) => {
   const [screen, setScreen] = useState<Screen>(outpost ? (outpost.status === 'active' ? 'planning' : 'results') : 'introduction');
   const [selectedDestination, setSelectedDestination] = useState<OutpostDestination>('lunar');
   const [selectedSystem, setSelectedSystem] = useState<OutpostSystem>('life-support');
@@ -673,12 +674,20 @@ const OutpostMission: React.FC<{
   };
 
   const currentEvent = outpost ? getEvent(outpost.destination, outpost.day) : null;
+  const tutorTopic = screen === 'planning' && currentEvent && outpost && !outpost.eventHandled
+    ? `outpost-event:${currentEvent.kind}`
+    : `outpost:${screen === 'planning' ? selectedSystem : screen}`;
   const communicationWaiting = Boolean(
     outpost
     && communication
     && communication.eventDay === outpost.day
     && communication.status !== 'delivered',
   );
+
+  useEffect(() => {
+    onTutorContextChange?.(tutorTopic);
+    return () => onTutorContextChange?.(null);
+  }, [onTutorContextChange, tutorTopic]);
 
   useEffect(() => {
     if (!communication || !['outbound', 'returning'].includes(communication.status)) return;
@@ -771,7 +780,7 @@ const OutpostMission: React.FC<{
           <div className="outpost-mission-message card-glass">
             <p className="outpost-eyebrow">MISSION CONTROL · NEW ASSIGNMENT</p>
             <h1>JUNIOR MISSION CONTROLLER, READY FOR YOUR NEXT MISSION?</h1>
-            <p>You helped Apollo 11 reach the Moon. Now it's time to help astronauts live and work there.</p>
+            <p>You helped Luna 11 reach the Moon. Now it's time to help astronauts live and work there.</p>
             <p>Keep their space home safe, warm and ready for each new day.</p>
             <strong>YOUR NEXT MISSION: CARE FOR A LUNAR OUTPOST!</strong>
             <button type="button" className="btn-primary" onClick={() => setScreen('destination')}>CONTINUE THE MISSION</button>
@@ -788,7 +797,7 @@ const OutpostMission: React.FC<{
         <header className="stage-header">
           <p className="outpost-eyebrow">MISSION CONTROL · CHOOSE A HOME FOR THE CREW</p>
           <h1 className="stage-title" id="outpost-destination-title">WHERE SHOULD WE BUILD?</h1>
-          <p className="stage-subtitle">The Moon continues the Apollo 11 mission. Mars is another place to explore. Both need careful planning.</p>
+          <p className="stage-subtitle">The Moon continues the Luna 11 mission. Mars is another place to explore. Both need careful planning.</p>
         </header>
         <div className="outpost-destination-grid">
           <button type="button" className={`outpost-destination-card card-glass ${selectedDestination === 'lunar' ? 'chosen' : ''}`} onClick={() => setSelectedDestination('lunar')}>
@@ -806,6 +815,16 @@ const OutpostMission: React.FC<{
             <strong>MARS · OUTPOST SITE ALPHA</strong>
           </button>
         </div>
+        {selectedDestination === 'lunar' && (
+          <aside className="outpost-data-attribution" aria-label="NASA Artemis Base Camp learning connection">
+            NASA’s Artemis Base Camp concept discusses long sunlight for power and access to water ice near the lunar South Pole.
+            This game uses those ideas to teach power and water planning. Its Sea of Tranquility outpost, resource values, and events are simulated,
+            not NASA’s base design.{' '}
+            <a href="https://www.nasa.gov/humans-in-space/nasas-artemis-base-camp-on-the-moon-will-need-light-water-elevation/" target="_blank" rel="noopener noreferrer">
+              Read NASA’s Artemis Base Camp article
+            </a>
+          </aside>
+        )}
         <div className="outpost-destination-action">
           <button type="button" className="btn-primary" onClick={() => beginOutpost(selectedDestination)}>
             ESTABLISH {selectedDestination === 'lunar' ? 'LUNAR' : 'MARTIAN'} OUTPOST
@@ -937,7 +956,7 @@ const OutpostMission: React.FC<{
       <div className="outpost-command-layout">
         <div className="outpost-habitat-column">
           <HabitatScene progress={outpost} selectedSystem={selectedSystem} eventKind={currentEvent?.kind ?? null} onSelectSystem={setSelectedSystem} />
-          <section className="outpost-system-panel card-glass" aria-live="polite">
+          <section className="outpost-system-panel card-glass" data-mentor-focus={selectedSystem} aria-live="polite">
             <div className="outpost-system-panel-heading">
               <div>
                 <p className="outpost-eyebrow">CHOSEN HABITAT SYSTEM</p>
@@ -968,7 +987,7 @@ const OutpostMission: React.FC<{
 
         <aside className="outpost-operations-column">
           {currentEvent && (
-            <section className={`outpost-event-panel card-glass ${eventWaiting ? 'event-needs-response' : 'event-resolved'}`} aria-live="polite">
+            <section className={`outpost-event-panel card-glass ${eventWaiting ? 'event-needs-response' : 'event-resolved'}`} data-mentor-focus={currentEvent.kind === 'solar-storm' ? 'radiation' : currentEvent.kind === 'panel-dust' || currentEvent.kind === 'battery-low' ? 'power' : currentEvent.kind === 'crop-stress' ? 'food' : 'life-support'} aria-live="polite">
               <p className="outpost-eyebrow">{currentEvent.alert}</p>
               <h2>{currentEvent.title}</h2>
               <p>{currentEvent.message}</p>
@@ -976,7 +995,7 @@ const OutpostMission: React.FC<{
                 <p className="outpost-data-attribution">
                   NASA's archived DONKI (space-weather database) model for a March 1, 2025 solar storm predicted it might pass near Mars on March 6.
                   The storm in this game is a different, made-up event.{' '}
-                  <a href="https://ccmc.gsfc.nasa.gov/DONKI/view/CME/37629/-1" target="_blank" rel="noopener noreferrer">
+                  <a href="https://ccmc.gsfc.nasa.gov/DONKI/events/37629/1/" target="_blank" rel="noopener noreferrer">
                     See NASA's DONKI record
                   </a>
                 </p>
@@ -1004,6 +1023,7 @@ const OutpostMission: React.FC<{
             <p>Mission Control is far away. Messages need time to reach Earth and come back, so the crew may need to choose what to do before a reply arrives.</p>
             <div
               className={`outpost-signal-route signal-${outpost.destination} ${communication ? `signal-${communication.status}` : ''}`}
+              data-mentor-focus="communication"
               aria-label={`Message route from the ${outpost.destination} outpost to Mission Control`}
             >
               <span>OUTPOST</span>
@@ -1077,10 +1097,12 @@ const OutpostMission: React.FC<{
       <details className="outpost-science-sources">
         <summary>NASA facts & how this game works</summary>
         <p>
-          Read NASA's <a href="https://science.nasa.gov/moon/facts/" target="_blank" rel="noopener noreferrer">Moon facts</a> and{' '}
-          <a href="https://science.nasa.gov/mars/facts/" target="_blank" rel="noopener noreferrer">Mars facts</a>.{' '}
-          <a href="https://www.nasa.gov/artemis/" target="_blank" rel="noopener noreferrer">Artemis</a> is NASA's plan for exploring the Moon. The NASA DONKI link shows an archived model of a real solar storm.
-          Supplies, weather and events in this game are made for learning. They are not live NASA data.
+          NASA says the Moon has a very thin, non-breathable exosphere; Mars has a thin atmosphere and a cold, dusty environment.
+          Read <a href="https://science.nasa.gov/moon/facts/" target="_blank" rel="noopener noreferrer">NASA Moon Facts</a> and{' '}
+          <a href="https://science.nasa.gov/mars/facts/" target="_blank" rel="noopener noreferrer">NASA Mars Facts</a>.
+          {' '}NASA’s <a href="https://www.nasa.gov/humans-in-space/artemis/" target="_blank" rel="noopener noreferrer">Artemis program</a> is exploring the Moon;
+          its <a href="https://www.nasa.gov/humans-in-space/nasas-artemis-base-camp-on-the-moon-will-need-light-water-elevation/" target="_blank" rel="noopener noreferrer">Artemis Base Camp concept</a> discusses sunlight and water ice.
+          Supplies, events, and outcomes in this game are simplified simulations, not live NASA data.
         </p>
       </details>
     </section>
